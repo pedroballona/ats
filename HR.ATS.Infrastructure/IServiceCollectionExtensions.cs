@@ -1,7 +1,6 @@
 using System;
-using HR.ATS.Domain.Candidate;
 using HR.ATS.Infrastructure.Mongo;
-using HR.ATS.Infrastructure.Repository.Common;
+using HR.ATS.Infrastructure.Repository;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.IdGenerators;
@@ -18,7 +17,7 @@ namespace HR.ATS.Infrastructure
             services.AddScoped(MongoDatabaseFactory.CreateDatabase);
 
             // Repositories
-            services.AddScoped<IRepository<Candidate>, GenericRepository<Candidate>>();
+            services.AddScoped<IPersonRepository, PersonRepository>();
 
             return services;
         }

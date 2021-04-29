@@ -23,5 +23,13 @@ namespace HR.ATS.Domain.Common
         {
             yield return Value;
         }
+
+        public override string ToString()
+        {
+            return Value;
+        }
+
+        public static implicit operator string(Name name) => name.Value;
+        public static implicit operator Name(string value) => new(value);
     }
 }

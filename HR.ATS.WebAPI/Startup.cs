@@ -1,5 +1,6 @@
 using HR.ATS.Infrastructure;
 using HR.ATS.WebAPI.Configurations;
+using HR.ATS.WebAPI.Middleware;
 using HR.ATS.WebAPI.Security.Roles;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -79,6 +80,8 @@ namespace HR.ATS.WebAPI
 
             app.UseRouting();
             app.UseAuthorization();
+
+            app.UseAutomaticPersonCreation();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
