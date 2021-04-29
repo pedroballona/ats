@@ -6,11 +6,6 @@ using MongoDB.Driver.Linq;
 
 namespace HR.ATS.Infrastructure.Repository
 {
-    public interface IPersonRepository : IRepository<Person>
-    {
-        Task<Person?> CreatePersonIfUserDoesntExist(Person person);
-    }
-
     internal class PersonRepository : GenericRepository<Person>, IPersonRepository
     {
         public PersonRepository(IMongoDatabase database) : base(database)
@@ -21,10 +16,7 @@ namespace HR.ATS.Infrastructure.Repository
         {
             var exists = await Collection.AsQueryable().AnyAsync(p => p.UserId == person.UserId);
 
-            if (!exists)
-            {
-                return await CreateAsync(person);
-            }
+            if (!exists) return await CreateAsync(person);
 
             return null;
         }

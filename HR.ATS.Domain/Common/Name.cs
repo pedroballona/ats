@@ -12,7 +12,7 @@ namespace HR.ATS.Domain.Common
 
         public string Value { get; private set; }
 
-        private static string CheckName(string value)
+        private static string CheckName(string? value)
         {
             value = value?.Trim();
             if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(nameof(value));

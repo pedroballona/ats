@@ -1,4 +1,5 @@
 using System;
+using HR.ATS.Domain.Person;
 using HR.ATS.Infrastructure.Mongo;
 using HR.ATS.Infrastructure.Repository;
 using Microsoft.Extensions.DependencyInjection;

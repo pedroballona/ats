@@ -1,9 +1,8 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using HR.ATS.Domain.Common;
 
-namespace HR.ATS.Infrastructure.Repository.Common
+namespace HR.ATS.Domain.Common
 {
     public interface IRepository<T> where T : Entity
     {

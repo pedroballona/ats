@@ -1,7 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using HR.ATS.Domain.Person;
-using HR.ATS.Infrastructure.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 
@@ -15,6 +14,7 @@ namespace HR.ATS.WebAPI.Middleware
             return app;
         }
 
+        // ReSharper disable once ClassNeverInstantiated.Local
         private class PersonCreationMiddleware
         {
             private readonly RequestDelegate _next;
