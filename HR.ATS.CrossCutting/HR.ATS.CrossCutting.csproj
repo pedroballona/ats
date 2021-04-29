@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <LangVersion>9</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Remove="Localization\I18n-en-US.json" />
+        <None Remove="Localization\I18n-es-ES.json" />
+        <None Remove="Localization\I18n-pt-BR.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="Localization\I18n-en-US.json" />
+        <EmbeddedResource Include="Localization\I18n-es-ES.json" />
+        <EmbeddedResource Include="Localization\I18n-pt-BR.json" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="Tnf.AspNetCore" Version="3.3.2.1402" />
+        <PackageReference Include="Tnf.AspNetCore.Security" Version="3.3.2.1402" />
+    </ItemGroup>
+
+</Project>

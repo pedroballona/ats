@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <LangVersion>9</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MongoDB.Driver" Version="2.12.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\HR.ATS.CrossCutting\HR.ATS.CrossCutting.csproj" />
+      <ProjectReference Include="..\HR.ATS.Domain\HR.ATS.Domain.csproj" />
+    </ItemGroup>
+
+</Project>

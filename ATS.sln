@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HR.ATS.WebAPI", "HR.ATS.WebAPI\HR.ATS.WebAPI.csproj", "{0EAF1D1E-A840-4160-8357-DFAF6F8188EA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CC8A2D85-231D-475D-8EC1-E9F8FEAB9B56}"
+ProjectSection(SolutionItems) = preProject
+	nuget.config = nuget.config
+EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HR.ATS.CrossCutting", "HR.ATS.CrossCutting\HR.ATS.CrossCutting.csproj", "{091D43C2-3F5B-4C0D-B05C-7C13EB719E39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HR.ATS.Infrastructure", "HR.ATS.Infrastructure\HR.ATS.Infrastructure.csproj", "{FDBB65AE-886A-4718-A7FB-385AEE624649}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HR.ATS.Domain", "HR.ATS.Domain\HR.ATS.Domain.csproj", "{1AD7CDF6-0DD3-45A9-8F9E-4091D33356BC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0EAF1D1E-A840-4160-8357-DFAF6F8188EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EAF1D1E-A840-4160-8357-DFAF6F8188EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EAF1D1E-A840-4160-8357-DFAF6F8188EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EAF1D1E-A840-4160-8357-DFAF6F8188EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{091D43C2-3F5B-4C0D-B05C-7C13EB719E39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{091D43C2-3F5B-4C0D-B05C-7C13EB719E39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{091D43C2-3F5B-4C0D-B05C-7C13EB719E39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{091D43C2-3F5B-4C0D-B05C-7C13EB719E39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDBB65AE-886A-4718-A7FB-385AEE624649}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDBB65AE-886A-4718-A7FB-385AEE624649}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDBB65AE-886A-4718-A7FB-385AEE624649}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDBB65AE-886A-4718-A7FB-385AEE624649}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AD7CDF6-0DD3-45A9-8F9E-4091D33356BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AD7CDF6-0DD3-45A9-8F9E-4091D33356BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AD7CDF6-0DD3-45A9-8F9E-4091D33356BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AD7CDF6-0DD3-45A9-8F9E-4091D33356BC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
