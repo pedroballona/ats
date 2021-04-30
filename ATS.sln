@@ -5,6 +5,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CC8A2D85-231D-475D-8EC1-E9F8FEAB9B56}"
 ProjectSection(SolutionItems) = preProject
 	nuget.config = nuget.config
+	Dockerfile = Dockerfile
 EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HR.ATS.CrossCutting", "HR.ATS.CrossCutting\HR.ATS.CrossCutting.csproj", "{091D43C2-3F5B-4C0D-B05C-7C13EB719E39}"

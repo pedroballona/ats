@@ -27,7 +27,7 @@ namespace HR.ATS.WebAPI
         {
             services.AddSingleton(new RacConfiguration(Configuration));
             // In production, the Angular files will be served from this directory
-            services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });
+            services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist/ats"; });
             services.AddAutoSwaggerSetup();
             services.AddMvcCore().AddNewtonsoftJson();
 
