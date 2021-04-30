@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using HR.ATS.Domain.Applicant;
 
 namespace HR.ATS.Domain.Common
 {
@@ -25,7 +24,7 @@ namespace HR.ATS.Domain.Common
             return value;
         }
 
-        protected override IEnumerable<object> GetEqualityComponents()
+        protected override IEnumerable<object?> GetEqualityComponents()
         {
             yield return Value;
         }

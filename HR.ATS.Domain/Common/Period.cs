@@ -8,7 +8,7 @@ namespace HR.ATS.Domain.Common
         protected static void CheckPeriod(DateTime? startDate, DateTime? endDate)
         {
             if (startDate > endDate)
-                    throw new ArgumentException(nameof(startDate));
+                throw new ArgumentException(nameof(startDate));
         }
     }
 
@@ -38,7 +38,7 @@ namespace HR.ATS.Domain.Common
             return endDate;
         }
 
-        protected override IEnumerable<object> GetEqualityComponents()
+        protected override IEnumerable<object?> GetEqualityComponents()
         {
             yield return StartDate;
             yield return EndDate;

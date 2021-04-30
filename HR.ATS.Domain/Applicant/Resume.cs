@@ -7,15 +7,14 @@ namespace HR.ATS.Domain.Applicant
 {
     public class Resume : ValueObject
     {
-        public Text Introduction { get; private set; }
-        public Experiences Experiences { get; private set; }
-
-
         public Resume(Text introduction, Experiences experiences)
         {
             Introduction = CheckIntroduction(introduction);
             Experiences = CheckExperiences(experiences);
         }
+
+        public Text Introduction { get; private set; }
+        public Experiences Experiences { get; private set; }
 
         private static Experiences CheckExperiences(Experiences experiences)
         {
@@ -27,7 +26,7 @@ namespace HR.ATS.Domain.Applicant
             return introduction ?? throw new ArgumentNullException(nameof(introduction));
         }
 
-        protected override IEnumerable<object> GetEqualityComponents()
+        protected override IEnumerable<object?> GetEqualityComponents()
         {
             yield return Introduction;
             yield return Experiences;
@@ -37,7 +36,7 @@ namespace HR.ATS.Domain.Applicant
         {
             Introduction = CheckIntroduction(introduction);
         }
-        
+
         public void ChangeExperiences(Experiences experiences)
         {
             Experiences = CheckExperiences(experiences);
@@ -47,9 +46,6 @@ namespace HR.ATS.Domain.Applicant
     public class Experience : ValueObject
     {
         private const int MaximumDescriptionLength = 200;
-        public Name Company { get; private set; }
-        public Text ExperienceDescription { get; private set; }
-        public OpenEndedPeriod Period { get; private set; }
 
         public Experience(
             Name company,
@@ -62,6 +58,10 @@ namespace HR.ATS.Domain.Applicant
             Period = period ?? throw new ArgumentNullException(nameof(period));
         }
 
+        public Name Company { get; private set; }
+        public Text ExperienceDescription { get; private set; }
+        public OpenEndedPeriod Period { get; private set; }
+
         private static Text CheckExperienceDescription(Text? experienceDescription)
         {
             if (experienceDescription is null || experienceDescription.Length > MaximumDescriptionLength)
@@ -72,7 +72,7 @@ namespace HR.ATS.Domain.Applicant
             return experienceDescription ?? throw new ArgumentNullException(nameof(experienceDescription));
         }
 
-        protected override IEnumerable<object> GetEqualityComponents()
+        protected override IEnumerable<object?> GetEqualityComponents()
         {
             yield return Company;
             yield return ExperienceDescription;
@@ -82,12 +82,12 @@ namespace HR.ATS.Domain.Applicant
 
     public class Experiences : ValueObject
     {
-        public IEnumerable<Experience> Items { get; private set; }
-
         public Experiences(IEnumerable<Experience> items)
         {
             Items = CheckItems(items);
         }
+
+        public IEnumerable<Experience> Items { get; private set; }
 
         private static IEnumerable<Experience> CheckItems(IEnumerable<Experience> items)
         {
@@ -101,7 +101,7 @@ namespace HR.ATS.Domain.Applicant
             return result;
         }
 
-        protected override IEnumerable<object> GetEqualityComponents()
+        protected override IEnumerable<object?> GetEqualityComponents()
         {
             return Items;
         }

@@ -22,7 +22,7 @@ namespace HR.ATS.Domain.Common
             return value;
         }
 
-        protected override IEnumerable<object> GetEqualityComponents()
+        protected override IEnumerable<object?> GetEqualityComponents()
         {
             yield return Value;
         }

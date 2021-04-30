@@ -19,7 +19,7 @@ namespace HR.ATS.Domain.Common
             return id;
         }
 
-        protected override IEnumerable<object> GetEqualityComponents()
+        protected override IEnumerable<object?> GetEqualityComponents()
         {
             yield return Id;
         }

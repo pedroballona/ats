@@ -1,4 +1,6 @@
+using HR.ATS.Command;
 using HR.ATS.Infrastructure;
+using HR.ATS.Query;
 using HR.ATS.WebAPI.Configurations;
 using HR.ATS.WebAPI.Middleware;
 using HR.ATS.WebAPI.Security.Roles;
@@ -37,7 +39,7 @@ namespace HR.ATS.WebAPI
                     .AddRacAuthorizationPolicy()
                     .AddControllers();
 
-            services.AddInfrastructure();
+            services.AddInfrastructure().AddQuery().AddCommand();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
