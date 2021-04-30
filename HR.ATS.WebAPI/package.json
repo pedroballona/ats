@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "angular-oauth2-oidc": "*",
+    "angular-oauth2-oidc-jwks": "*"
+  }
+}

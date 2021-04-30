@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  authorityEndpoint: "https://totvsats.rac.dev.totvs.app/totvs.rac",
+  clientId: "ats_oidc",
+  clientSecret: "totvs@123"
 };
 
 /*
