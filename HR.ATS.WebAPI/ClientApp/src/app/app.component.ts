@@ -1,9 +1,50 @@
-import { Component } from '@angular/core';
+import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import {
+  AuthConfig,
+  OAuthService
+} from 'angular-oauth2-oidc';
+import { JwksValidationHandler } from 'angular-oauth2-oidc-jwks';
+import { environment } from '../environments/environment';
+
+export const authConfig: AuthConfig = {
+  // Url of the Identity Provider
+  issuer: environment.authorityEndpoint,
+
+  // URL of the SPA to redirect the user to after login
+  redirectUri: window.location.origin,
+
+  // The SPA's id. The SPA is registered with this id at the auth-server
+  clientId: environment.clientId,
+
+  // set the scope for the permissions the client should request
+  // The first three are defined by OIDC. The 4th is a usecase-specific one
+  scope: 'openid profile email authorization_api offline_access',
+
+  responseType: 'code id_token token'
+};
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
-  title = 'app';
+export class AppComponent implements OnInit {
+  title = 'ats';
+
+  constructor(private oauthService: OAuthService, private location: Location) {}
+
+  async ngOnInit(): Promise<void> {
+    this.oauthService.configure(authConfig);
+    this.oauthService.tokenValidationHandler = new JwksValidationHandler();
+    await this.oauthService
+      .loadDiscoveryDocumentAndLogin({
+        state: this.location.path(),
+        onTokenReceived: () => {
+          if (this.oauthService.state) {
+            this.location.go(this.oauthService.state);
+          }
+        }
+      });
+  }
 }
