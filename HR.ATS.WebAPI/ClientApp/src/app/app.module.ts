@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { ApplicationRootPageComponent } from './pages/application-root-page/application-root-page.component';
 import { PreLoaderPageComponent } from './pages/pre-loader-page/pre-loader-page.component';
 import { ResumePageComponent } from './pages/resume-page/resume-page.component';
+import { HomeComponent } from './pages/home/home.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ResumePageComponent } from './pages/resume-page/resume-page.component';
     AppComponent,
     ResumePageComponent,
     PreLoaderPageComponent,
-    ApplicationRootPageComponent
+    ApplicationRootPageComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

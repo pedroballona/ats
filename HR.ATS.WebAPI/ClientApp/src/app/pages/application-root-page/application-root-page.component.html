@@ -1,10 +1,7 @@
 <div class="po-wrapper">
   <po-toolbar p-title="TOTVS ATS"></po-toolbar>
 
-  <po-menu *ngIf="menus$ | async as menu" [p-menus]="menu"></po-menu>
+  <po-menu *ngIf="menus$ | async as menu" [p-menus]="menu" [p-logo]="'assets/img/totvs.png'"></po-menu>
 
-  <po-page-default p-title="AppName">
-    <p> {{token}} </p>
-    <po-button [p-label]="'Logout'" (p-click)="logout()"></po-button>
-  </po-page-default>
+  <router-outlet></router-outlet>
 </div>
