@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using HR.ATS.CrossCutting;
 
 namespace HR.ATS.Domain.Common
 {
@@ -12,14 +13,14 @@ namespace HR.ATS.Domain.Common
 
         public string Value { get; private set; }
 
-        private static string CheckName(string value)
+        private static string CheckName(string? value)
         {
             value = value?.Trim();
-            if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(nameof(value));
+            if (string.IsNullOrWhiteSpace(value)) throw new ValidationFieldRequiredException("name");
             return value;
         }
 
-        protected override IEnumerable<object> GetEqualityComponents()
+        protected override IEnumerable<object?> GetEqualityComponents()
         {
             yield return Value;
         }

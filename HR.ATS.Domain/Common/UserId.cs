@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using HR.ATS.CrossCutting;
 
 namespace HR.ATS.Domain.Common
 {
@@ -16,13 +17,13 @@ namespace HR.ATS.Domain.Common
         {
             if (value <= 0)
             {
-                throw new ArgumentException(nameof(value));
+                throw new ValidationFieldRequiredException("user id");
             }
 
             return value;
         }
 
-        protected override IEnumerable<object> GetEqualityComponents()
+        protected override IEnumerable<object?> GetEqualityComponents()
         {
             yield return Value;
         }

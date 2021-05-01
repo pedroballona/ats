@@ -1,4 +1,6 @@
 using System;
+using HR.ATS.Domain.Applicant;
+using HR.ATS.Domain.Person;
 using HR.ATS.Infrastructure.Mongo;
 using HR.ATS.Infrastructure.Repository;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +20,7 @@ namespace HR.ATS.Infrastructure
 
             // Repositories
             services.AddScoped<IPersonRepository, PersonRepository>();
+            services.AddScoped<IApplicantRepository, ApplicantRepository>();
 
             return services;
         }

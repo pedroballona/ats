@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using HR.ATS.CrossCutting;
 
 namespace HR.ATS.Domain.Common
 {
@@ -12,12 +13,12 @@ namespace HR.ATS.Domain.Common
 
         public string Value { get; private set; }
 
-        private static string CheckValue(string value)
+        private static string CheckValue(string? value)
         {
             value = value?.Trim().ToLower();
             if (string.IsNullOrWhiteSpace(value) || !IsValidEmail(value))
             {
-                throw new ArgumentException(nameof(value));
+                throw new ValidationFieldRequiredException($"The provided value '{value}' is not a valid email");
             }
 
             return value;
@@ -36,7 +37,7 @@ namespace HR.ATS.Domain.Common
             }
         }
 
-        protected override IEnumerable<object> GetEqualityComponents()
+        protected override IEnumerable<object?> GetEqualityComponents()
         {
             yield return Value;
         }

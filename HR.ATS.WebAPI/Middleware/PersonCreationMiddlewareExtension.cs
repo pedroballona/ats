@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
-using HR.ATS.Domain.Person;
-using HR.ATS.Infrastructure.Repository;
+using HR.ATS.Command.Person;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 
@@ -15,6 +15,7 @@ namespace HR.ATS.WebAPI.Middleware
             return app;
         }
 
+        // ReSharper disable once ClassNeverInstantiated.Local
         private class PersonCreationMiddleware
         {
             private readonly RequestDelegate _next;
@@ -24,15 +25,15 @@ namespace HR.ATS.WebAPI.Middleware
                 _next = next;
             }
 
-            public async Task Invoke(HttpContext httpContext, IPersonRepository personRepository)
+            public async Task Invoke(HttpContext httpContext, IMediator mediator)
             {
                 var userId = httpContext.GetUserId();
                 if (userId.HasValue)
                 {
                     var name = httpContext.User.Claims.Where(c => c.Type == "name").Select(c => c.Value).Last();
                     var email = httpContext.User.Claims.Where(c => c.Type == "email").Select(c => c.Value).Last();
-                    var person = new Person(name, email, userId.Value);
-                    await personRepository.CreatePersonIfUserDoesntExist(person);
+                    var personCommand = new CreatePersonWhenUserDoesntExistsCommand(name, email, userId.Value);
+                    await mediator.Send(personCommand);
                 }
 
                 await _next(httpContext);

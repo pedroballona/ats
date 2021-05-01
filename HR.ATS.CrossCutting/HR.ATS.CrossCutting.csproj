@@ -3,6 +3,7 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <LangVersion>9</LangVersion>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
@@ -10,16 +11,25 @@
         <None Remove="Localization\I18n-es-ES.json" />
         <None Remove="Localization\I18n-pt-BR.json" />
     </ItemGroup>
-
-    <ItemGroup>
-        <EmbeddedResource Include="Localization\I18n-en-US.json" />
-        <EmbeddedResource Include="Localization\I18n-es-ES.json" />
-        <EmbeddedResource Include="Localization\I18n-pt-BR.json" />
-    </ItemGroup>
     
     <ItemGroup>
         <PackageReference Include="Tnf.AspNetCore" Version="3.3.2.1402" />
         <PackageReference Include="Tnf.AspNetCore.Security" Version="3.3.2.1402" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <EmbeddedResource Update="Localization\Resource.pt-br.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Resource.pt-br.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Compile Update="Localization\Resource.pt-br.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Resource.pt-br.resx</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>

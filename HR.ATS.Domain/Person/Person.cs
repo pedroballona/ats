@@ -1,4 +1,5 @@
 using System;
+using HR.ATS.CrossCutting;
 using HR.ATS.Domain.Common;
 
 namespace HR.ATS.Domain.Person
@@ -26,17 +27,17 @@ namespace HR.ATS.Domain.Person
 
         private static UserId CheckUserId(UserId userId)
         {
-            return userId ?? throw new ArgumentNullException(nameof(userId));
+            return userId ?? throw new ValidationFieldRequiredException("person user id");
         }
 
         private static Email CheckEmail(Email email)
         {
-            return email ?? throw new ArgumentNullException(nameof(email));
+            return email ?? throw new ValidationFieldRequiredException("person email");
         }
 
         private static Name CheckName(Name name)
         {
-            return name ?? throw new ArgumentNullException(nameof(name));
+            return name ?? throw new ValidationFieldRequiredException("person name");
         }
 
         public override string ToString()

@@ -1,4 +1,6 @@
+using HR.ATS.Command;
 using HR.ATS.Infrastructure;
+using HR.ATS.Query;
 using HR.ATS.WebAPI.Configurations;
 using HR.ATS.WebAPI.Middleware;
 using HR.ATS.WebAPI.Security.Roles;
@@ -35,9 +37,9 @@ namespace HR.ATS.WebAPI
                     .AddTnfAspNetCore()
                     .AddTnfAspNetCoreSecurity(Configuration)
                     .AddRacAuthorizationPolicy()
-                    .AddControllers();
+                    .AddControllers(options => options.Filters.Add(new HttpResponseExceptionFilter()));
 
-            services.AddInfrastructure();
+            services.AddInfrastructure().AddQuery().AddCommand();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,13 +54,7 @@ namespace HR.ATS.WebAPI
                                   .WithExposedHeaders("Content-Disposition", "File-Name")
             );
 
-            app.UseTnfAspNetCore(
-                options =>
-                {
-                    //options.ConfigureLocalization();
-                    options.MultiTenancy(tenant => tenant.IsEnabled = true);
-                }
-            );
+            app.UseTnfAspNetCore(options => { options.MultiTenancy(tenant => tenant.IsEnabled = true); });
 
             app.UseTnfAspNetCoreSecurity(
                 config =>
