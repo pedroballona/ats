@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using HR.ATS.CrossCutting;
 
 namespace HR.ATS.Domain.Common
 {
@@ -14,7 +15,7 @@ namespace HR.ATS.Domain.Common
 
         private Guid CheckId(Guid id)
         {
-            if (id == default) throw new ArgumentNullException(nameof(id));
+            if (id == default) throw new ValidationException(nameof(id));
 
             return id;
         }

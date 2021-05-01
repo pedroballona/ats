@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using HR.ATS.CrossCutting;
 using HR.ATS.Domain.Common;
 
 namespace HR.ATS.Domain.Applicant
@@ -18,12 +19,12 @@ namespace HR.ATS.Domain.Applicant
 
         private static Experiences CheckExperiences(Experiences experiences)
         {
-            return experiences ?? throw new ArgumentNullException(nameof(experiences));
+            return experiences ?? throw new ValidationFieldRequiredException("Experiences");
         }
 
         private static Text CheckIntroduction(Text introduction)
         {
-            return introduction ?? throw new ArgumentNullException(nameof(introduction));
+            return introduction ?? throw new ValidationFieldRequiredException("Introduction");
         }
 
         protected override IEnumerable<object?> GetEqualityComponents()
@@ -49,33 +50,33 @@ namespace HR.ATS.Domain.Applicant
 
         public Experience(
             Name company,
-            Text experienceDescription,
+            Text description,
             OpenEndedPeriod period
         )
         {
-            Company = company ?? throw new ArgumentNullException(nameof(company));
-            ExperienceDescription = CheckExperienceDescription(experienceDescription);
-            Period = period ?? throw new ArgumentNullException(nameof(period));
+            Company = company ?? throw new ValidationFieldRequiredException("company name");
+            Description = CheckDescription(description);
+            Period = period ?? throw new ValidationFieldRequiredException("experience period");
         }
 
         public Name Company { get; private set; }
-        public Text ExperienceDescription { get; private set; }
+        public Text Description { get; private set; }
         public OpenEndedPeriod Period { get; private set; }
 
-        private static Text CheckExperienceDescription(Text? experienceDescription)
+        private static Text CheckDescription(Text? experienceDescription)
         {
             if (experienceDescription is null || experienceDescription.Length > MaximumDescriptionLength)
             {
                 throw new ArgumentNullException(nameof(experienceDescription));
             }
 
-            return experienceDescription ?? throw new ArgumentNullException(nameof(experienceDescription));
+            return experienceDescription ?? throw new ValidationFieldRequiredException("experience description");
         }
 
         protected override IEnumerable<object?> GetEqualityComponents()
         {
             yield return Company;
-            yield return ExperienceDescription;
+            yield return Description;
             yield return Period;
         }
     }
@@ -95,7 +96,7 @@ namespace HR.ATS.Domain.Applicant
 
             if (result is null || result.Count == 0)
             {
-                throw new ArgumentException(nameof(items));
+                throw new ValidationException("It's required to have at least one experience instance.");
             }
 
             return result;

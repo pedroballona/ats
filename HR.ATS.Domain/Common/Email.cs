@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using HR.ATS.CrossCutting;
 
 namespace HR.ATS.Domain.Common
 {
@@ -17,7 +18,7 @@ namespace HR.ATS.Domain.Common
             value = value?.Trim().ToLower();
             if (string.IsNullOrWhiteSpace(value) || !IsValidEmail(value))
             {
-                throw new ArgumentException(nameof(value));
+                throw new ValidationFieldRequiredException($"The provided value '{value}' is not a valid email");
             }
 
             return value;

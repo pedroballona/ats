@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using HR.ATS.CrossCutting;
 
 namespace HR.ATS.Domain.Common
 {
@@ -19,7 +20,7 @@ namespace HR.ATS.Domain.Common
             value = value?.Trim();
 
             if (string.IsNullOrWhiteSpace(value))
-                throw new ArgumentException(nameof(value));
+                throw new ValidationFieldRequiredException("textual field");
 
             return value;
         }

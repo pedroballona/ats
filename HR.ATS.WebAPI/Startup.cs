@@ -37,7 +37,7 @@ namespace HR.ATS.WebAPI
                     .AddTnfAspNetCore()
                     .AddTnfAspNetCoreSecurity(Configuration)
                     .AddRacAuthorizationPolicy()
-                    .AddControllers();
+                    .AddControllers(options => options.Filters.Add(new HttpResponseExceptionFilter()));
 
             services.AddInfrastructure().AddQuery().AddCommand();
         }
@@ -54,13 +54,7 @@ namespace HR.ATS.WebAPI
                                   .WithExposedHeaders("Content-Disposition", "File-Name")
             );
 
-            app.UseTnfAspNetCore(
-                options =>
-                {
-                    //options.ConfigureLocalization();
-                    options.MultiTenancy(tenant => tenant.IsEnabled = true);
-                }
-            );
+            app.UseTnfAspNetCore(options => { options.MultiTenancy(tenant => tenant.IsEnabled = true); });
 
             app.UseTnfAspNetCoreSecurity(
                 config =>

@@ -35,7 +35,7 @@ namespace HR.ATS.Domain.Common
                 );
         }
 
-        public static bool operator ==(ValueObject a, ValueObject b)
+        public static bool operator ==(ValueObject? a, ValueObject? b)
         {
             if (ReferenceEquals(a, null) && ReferenceEquals(b, null))
                 return true;
