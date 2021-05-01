@@ -1,9 +1,5 @@
-import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import {
-  AuthConfig,
-  OAuthService
-} from 'angular-oauth2-oidc';
+import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
 import { JwksValidationHandler } from 'angular-oauth2-oidc-jwks';
 import { environment } from '../environments/environment';
 
@@ -21,7 +17,7 @@ export const authConfig: AuthConfig = {
   // The first three are defined by OIDC. The 4th is a usecase-specific one
   scope: 'openid profile email authorization_api offline_access',
 
-  responseType: 'code id_token token'
+  responseType: 'code id_token token',
 };
 
 @Component({
@@ -30,21 +26,11 @@ export const authConfig: AuthConfig = {
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  title = 'ats';
 
-  constructor(private oauthService: OAuthService, private location: Location) {}
+  constructor(private oauthService: OAuthService) {}
 
   async ngOnInit(): Promise<void> {
     this.oauthService.configure(authConfig);
     this.oauthService.tokenValidationHandler = new JwksValidationHandler();
-    await this.oauthService
-      .loadDiscoveryDocumentAndLogin({
-        state: this.location.path(),
-        onTokenReceived: () => {
-          if (this.oauthService.state) {
-            this.location.go(this.oauthService.state);
-          }
-        }
-      });
   }
 }

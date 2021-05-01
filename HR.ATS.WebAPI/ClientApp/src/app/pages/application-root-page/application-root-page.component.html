@@ -1,0 +1,10 @@
+<div class="po-wrapper">
+  <po-toolbar p-title="TOTVS ATS"></po-toolbar>
+
+  <po-menu [p-menus]="menus"></po-menu>
+
+  <po-page-default p-title="AppName">
+    <p> {{token}} </p>
+    <po-button [p-label]="'Logout'" (p-click)="logout()"></po-button>
+  </po-page-default>
+</div>
