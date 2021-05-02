@@ -2,11 +2,13 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { Host } from '../app/utils/host';
+
 export const environment = {
   production: false,
-  authorityEndpoint: "https://totvsats.rac.dev.totvs.app/totvs.rac",
-  clientId: "ats_oidc",
-  clientSecret: "totvs@123"
+  authorityEndpoint: `https://${Host.getTenantName()}.rac.dev.totvs.app/totvs.rac`,
+  clientId: 'ats_oidc',
+  clientSecret: 'totvs@123'
 };
 
 /*

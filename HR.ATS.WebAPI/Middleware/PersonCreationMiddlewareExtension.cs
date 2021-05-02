@@ -4,6 +4,7 @@ using HR.ATS.Command.Person;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace HR.ATS.WebAPI.Middleware
 {
@@ -25,17 +26,23 @@ namespace HR.ATS.WebAPI.Middleware
                 _next = next;
             }
 
-            public async Task Invoke(HttpContext httpContext, IMediator mediator)
+            public async Task Invoke(HttpContext httpContext, IMediator mediator, IMemoryCache memoryCache)
             {
                 var userId = httpContext.GetUserId();
-                if (userId.HasValue)
+                if (userId is null)
+                {
+                    await _next(httpContext);
+                    return;
+                }
+                var key = "Has_PersonCreatedFor_" + userId;
+                if (!memoryCache.TryGetValue(key, out bool _))
                 {
                     var name = httpContext.User.Claims.Where(c => c.Type == "name").Select(c => c.Value).Last();
                     var email = httpContext.User.Claims.Where(c => c.Type == "email").Select(c => c.Value).Last();
                     var personCommand = new CreatePersonWhenUserDoesntExistsCommand(name, email, userId.Value);
                     await mediator.Send(personCommand);
+                    memoryCache.Set(key, true);
                 }
-
                 await _next(httpContext);
             }
         }
