@@ -12,6 +12,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { PreLoaderPageComponent } from './pages/pre-loader-page/pre-loader-page.component';
 import { ResumeFormComponent } from './pages/resume-page/components/resume-form/resume-form.component';
 import { ResumePageComponent } from './pages/resume-page/resume-page.component';
+import { OpeningManagementPageComponent } from './pages/opening-management-page/opening-management-page.component';
+import { OpeningFormComponent } from './pages/opening-management-page/components/opening-form/opening-form.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { ResumePageComponent } from './pages/resume-page/resume-page.component';
     PreLoaderPageComponent,
     ApplicationRootPageComponent,
     HomeComponent,
-    ResumeFormComponent
+    ResumeFormComponent,
+    OpeningManagementPageComponent,
+    OpeningFormComponent
   ],
   imports: [
     BrowserModule,

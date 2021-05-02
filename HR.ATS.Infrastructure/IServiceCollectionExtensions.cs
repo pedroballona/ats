@@ -1,5 +1,6 @@
 using System;
 using HR.ATS.Domain.Applicant;
+using HR.ATS.Domain.Opening;
 using HR.ATS.Domain.Person;
 using HR.ATS.Infrastructure.Mongo;
 using HR.ATS.Infrastructure.Repository;
@@ -21,6 +22,8 @@ namespace HR.ATS.Infrastructure
             // Repositories
             services.AddScoped<IPersonRepository, PersonRepository>();
             services.AddScoped<IApplicantRepository, ApplicantRepository>();
+            services.AddScoped<IApplicationRepository, ApplicationRepository>();
+            services.AddScoped<IOpeningRepository, OpeningRepository>();
 
             return services;
         }

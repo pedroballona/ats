@@ -26,7 +26,11 @@ namespace HR.ATS.WebAPI.Middleware
                 _next = next;
             }
 
-            public async Task Invoke(HttpContext httpContext, IMediator mediator, IMemoryCache memoryCache)
+            public async Task Invoke(
+                HttpContext httpContext,
+                IMediator mediator,
+                IMemoryCache memoryCache
+            )
             {
                 var userId = httpContext.GetUserId();
                 if (userId is null)
@@ -34,6 +38,7 @@ namespace HR.ATS.WebAPI.Middleware
                     await _next(httpContext);
                     return;
                 }
+
                 var key = "Has_PersonCreatedFor_" + userId;
                 if (!memoryCache.TryGetValue(key, out bool _))
                 {
@@ -43,6 +48,7 @@ namespace HR.ATS.WebAPI.Middleware
                     await mediator.Send(personCommand);
                     memoryCache.Set(key, true);
                 }
+
                 await _next(httpContext);
             }
         }

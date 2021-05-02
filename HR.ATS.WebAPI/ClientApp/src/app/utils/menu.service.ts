@@ -13,31 +13,45 @@ const menu: MenuItem[] = [
   {
     label: 'My resume',
     link: 'resume',
-    permissions: [
-      Role.Candidate
+    permissions: [Role.Candidate],
+    icon: 'po-icon-document-filled',
+  },
+  {
+    label: 'Openings',
+    icon: 'po-icon-grid',
+    permissions: [],
+    subItems: [
+      {
+        label: 'Management',
+        permissions: [Role.Recruiter],
+        link: 'opening/management',
+      },
     ],
-    icon: 'po-icon-document-filled'
-  }
+  },
 ];
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MenuService {
-  menu$: Observable<MenuItem[]> = this.authService.state$.pipe(map(user => {
-    if (!user) {
-      return [];
-    }
-    return this.getMenus(user.roles, menu);
-  }));
+  menu$: Observable<MenuItem[]> = this.authService.state$.pipe(
+    map((user) => {
+      if (!user) {
+        return [];
+      }
+      return this.getMenus(user.roles, menu);
+    })
+  );
 
-  constructor(private authService: AuthService) {
-  }
+  constructor(private authService: AuthService) {}
 
   private getMenus(roles: Role[], menuItems: MenuItem[]): MenuItem[] {
     const result: MenuItem[] = [];
     for (const item of menuItems) {
-      const canAccess = !item.permissions || item.permissions.length === 0 || this.authService.canLoggedUserAccess(item.permissions);
+      const canAccess =
+        !item.permissions ||
+        item.permissions.length === 0 ||
+        this.authService.canLoggedUserAccess(item.permissions);
       if (!canAccess) {
         continue;
       }
@@ -48,7 +62,7 @@ export class MenuService {
           continue;
         }
       }
-      result.push({...item, subItems});
+      result.push({ ...item, subItems });
     }
     return result;
   }

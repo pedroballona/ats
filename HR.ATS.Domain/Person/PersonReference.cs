@@ -11,6 +11,10 @@ namespace HR.ATS.Domain.Person
         }
 
         public Name Name { get; private set; }
-        public static implicit operator PersonReference(Person person) => new(person.Id, person.Name);
+
+        public static implicit operator PersonReference(Person person)
+        {
+            return new(person.Id, person.Name);
+        }
     }
 }

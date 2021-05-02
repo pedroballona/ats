@@ -1,4 +1,3 @@
-using System;
 using HR.ATS.CrossCutting;
 using HR.ATS.Domain.Common;
 

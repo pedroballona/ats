@@ -1,0 +1,14 @@
+<po-modal
+  *ngIf="primaryAction$ | async as primaryAction"
+  p-title="Create opening"
+  [p-primary-action]="primaryAction"
+  [p-secondary-action]="secondaryAction"
+>
+  <form [formGroup]="formGroup">
+    <po-input p-label="Name" formControlName="name"></po-input>
+    <po-textarea
+      p-label="Description"
+      formControlName="description"
+    ></po-textarea>
+  </form>
+</po-modal>

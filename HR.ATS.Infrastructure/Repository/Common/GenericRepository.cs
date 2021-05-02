@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using HR.ATS.Domain.Common;
@@ -26,6 +27,11 @@ namespace HR.ATS.Infrastructure.Repository.Common
             await Collection.InsertOneAsync(entity, cancellationToken: cancellationToken);
             return entity;
         }
+        
+        public async Task DeleteAsync(Guid id, CancellationToken cancellationToken = default)
+        {
+            await Collection.DeleteOneAsync(d => d.Id == id, cancellationToken);
+        }
 
         public async Task<T> UpdateAsync(T entity, CancellationToken cancellationToken = default)
         {
@@ -40,6 +46,11 @@ namespace HR.ATS.Infrastructure.Repository.Common
         public Task<bool> ExistsAsync(Guid id, CancellationToken cancellationToken = default)
         {
             return Collection.AsQueryable().Where(e => e.Id == id).AnyAsync(cancellationToken);
+        }
+
+        public async Task<IEnumerable<T>> GetAll()
+        {
+            return await Collection.AsQueryable().ToListAsync();
         }
     }
 }
