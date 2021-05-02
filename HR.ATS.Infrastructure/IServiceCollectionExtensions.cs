@@ -22,6 +22,7 @@ namespace HR.ATS.Infrastructure
             // Repositories
             services.AddScoped<IPersonRepository, PersonRepository>();
             services.AddScoped<IApplicantRepository, ApplicantRepository>();
+            services.AddScoped<IApplicationRepository, ApplicationRepository>();
             services.AddScoped<IOpeningRepository, OpeningRepository>();
 
             return services;

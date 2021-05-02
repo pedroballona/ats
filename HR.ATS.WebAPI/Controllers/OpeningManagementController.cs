@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
@@ -29,7 +30,7 @@ namespace HR.ATS.WebAPI.Controllers
         public async Task<IActionResult> GetAllOpenings(string? filter)
         {
             var result = await _mediator.Send(new GetAllOpeningsQuery(filter));
-            return CreateResponseOnGetAll(result);
+            return Ok(result);
         }
         
         [HttpPost]
@@ -39,6 +40,15 @@ namespace HR.ATS.WebAPI.Controllers
         {
             var result = await _mediator.Send(new CreateOpeningCommand(openingDto));
             return CreateResponseOnPost(result);
+        }
+
+        [HttpDelete("{id:guid}")]
+        [ProducesResponseType((int) HttpStatusCode.NoContent)]
+        [ProducesResponseType(typeof(TotvsErrorMessage), (int) HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> DeleteOpening(Guid id)
+        {
+            await _mediator.Send(new DeleteOpeningCommand(id));
+            return CreateResponseOnDelete();
         }
     }
 }

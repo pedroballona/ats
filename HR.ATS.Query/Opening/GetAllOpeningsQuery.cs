@@ -34,19 +34,21 @@ namespace HR.ATS.Query.Opening
         {
             var openingCollection = _database.GetCollection<Domain.Opening.Opening>(nameof(Domain.Opening.Opening));
             var filter = string.IsNullOrWhiteSpace(request.Filter) ? default : request.Filter;
-            var result = await openingCollection.AsQueryable()
-                                                .Where(
-                                                    opening => filter == null ||
-                                                               opening.Name.Value.ToLower().Contains(filter.ToLower())
-                                                )
-                                                .Select(
-                                                    opening => new OpeningDTO
-                                                    {
-                                                        Name = opening.Name.Value,
-                                                        Description = opening.Description.Value
-                                                    }
-                                                )
-                                                .ToListAsync(cancellationToken);
+            var query = openingCollection.AsQueryable();
+            if (filter is not null)
+            {
+                query = query.Where(opening => opening.Name.Value.ToLower().Contains(filter));
+            }
+            var result = await query
+                               .Select(
+                                   opening => new OpeningDTO
+                                   {
+                                       Name = opening.Name.Value,
+                                       Description = opening.Description.Value,
+                                       Id = opening.Id
+                                   }
+                               )
+                               .ToListAsync(cancellationToken);
             return result;
         }
     }

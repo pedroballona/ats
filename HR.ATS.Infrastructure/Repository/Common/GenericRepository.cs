@@ -27,6 +27,11 @@ namespace HR.ATS.Infrastructure.Repository.Common
             await Collection.InsertOneAsync(entity, cancellationToken: cancellationToken);
             return entity;
         }
+        
+        public async Task DeleteAsync(Guid id, CancellationToken cancellationToken = default)
+        {
+            await Collection.DeleteOneAsync(d => d.Id == id, cancellationToken);
+        }
 
         public async Task<T> UpdateAsync(T entity, CancellationToken cancellationToken = default)
         {

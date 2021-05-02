@@ -12,5 +12,6 @@ namespace HR.ATS.Domain.Common
         public Task<T> UpdateAsync(T entity, CancellationToken cancellationToken = default);
         public Task<bool> ExistsAsync(Guid id, CancellationToken cancellationToken = default);
         Task<IEnumerable<T>> GetAll();
+        Task DeleteAsync(Guid id, CancellationToken cancellationToken = default);
     }
 }
