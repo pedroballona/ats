@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,7 +7,6 @@ using HR.ATS.Domain.Applicant;
 using HR.ATS.Domain.Common;
 using HR.ATS.Domain.Person;
 using MediatR;
-using Microsoft.Extensions.Localization;
 
 namespace HR.ATS.Command.Applicant
 {
@@ -25,8 +23,8 @@ namespace HR.ATS.Command.Applicant
     internal class
         UpdateResumeForLoggedApplicantCommandHandler : IRequestHandler<UpdateResumeForLoggedApplicantCommand, ResumeDTO>
     {
-        private readonly IPersonRepository _personRepository;
         private readonly IApplicantRepository _applicantRepository;
+        private readonly IPersonRepository _personRepository;
 
         public UpdateResumeForLoggedApplicantCommandHandler(
             IPersonRepository personRepository,
@@ -43,25 +41,19 @@ namespace HR.ATS.Command.Applicant
         )
         {
             var loggedPerson = await _personRepository.GetLoggedPerson();
-            
-            if (loggedPerson is null)
-            {
-                throw new ValidationException("The current logged user is not a person.");
-            }
+
+            if (loggedPerson is null) throw new ValidationException("The current logged user is not a person.");
 
             var applicant = await _applicantRepository.GetApplicantFromPerson(loggedPerson.Id);
-            Resume resume = new (
-                request.Resume.Introduction,
-                new Experiences(
-                    request.Resume.Experiences.Select(
-                        e => new Experience(
-                            e.Company,
-                            e.Description,
-                            new OpenEndedPeriod(e.PeriodStartDate, e.PeriodEndDate)
-                        )
+            Resume resume = new(request.Resume.Introduction, new Experiences(
+                request.Resume.Experiences?.Select(
+                    e => new Experience(
+                        e.Company,
+                        e.Description,
+                        new OpenEndedPeriod(e.PeriodStartDate, e.PeriodEndDate)
                     )
-                )
-            );
+                )!
+            ));
             if (applicant is null)
             {
                 applicant = new Domain.Applicant.Applicant(loggedPerson, resume);

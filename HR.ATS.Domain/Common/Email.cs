@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Net.Mail;
 using HR.ATS.CrossCutting;
 
 namespace HR.ATS.Domain.Common
@@ -17,9 +17,7 @@ namespace HR.ATS.Domain.Common
         {
             value = value?.Trim().ToLower();
             if (string.IsNullOrWhiteSpace(value) || !IsValidEmail(value))
-            {
                 throw new ValidationFieldRequiredException($"The provided value '{value}' is not a valid email");
-            }
 
             return value;
         }
@@ -28,7 +26,7 @@ namespace HR.ATS.Domain.Common
         {
             try
             {
-                var addr = new System.Net.Mail.MailAddress(value);
+                var addr = new MailAddress(value);
                 return addr.Address == value;
             }
             catch
@@ -47,7 +45,14 @@ namespace HR.ATS.Domain.Common
             return Value;
         }
 
-        public static implicit operator string(Email email) => email.Value;
-        public static implicit operator Email(string value) => new(value);
+        public static implicit operator string(Email email)
+        {
+            return email.Value;
+        }
+
+        public static implicit operator Email(string value)
+        {
+            return new(value);
+        }
     }
 }

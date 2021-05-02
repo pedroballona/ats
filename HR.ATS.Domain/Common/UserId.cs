@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using HR.ATS.CrossCutting;
 
@@ -15,10 +14,7 @@ namespace HR.ATS.Domain.Common
 
         private static long CheckValue(long value)
         {
-            if (value <= 0)
-            {
-                throw new ValidationFieldRequiredException("user id");
-            }
+            if (value <= 0) throw new ValidationFieldRequiredException("user id");
 
             return value;
         }
@@ -33,7 +29,14 @@ namespace HR.ATS.Domain.Common
             return Value.ToString();
         }
 
-        public static implicit operator long(UserId name) => name.Value;
-        public static implicit operator UserId(long value) => new(value);
+        public static implicit operator long(UserId name)
+        {
+            return name.Value;
+        }
+
+        public static implicit operator UserId(long value)
+        {
+            return new(value);
+        }
     }
 }

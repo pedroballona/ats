@@ -38,7 +38,7 @@ namespace HR.ATS.Command.Person
             CancellationToken cancellationToken
         )
         {
-            var person = new HR.ATS.Domain.Person.Person(request.Name, request.Email, request.UserId);
+            var person = new Domain.Person.Person(request.Name, request.Email, request.UserId);
             await _personRepository.CreatePersonIfUserDoesntExist(person);
             return Unit.Value;
         }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using HR.ATS.Domain.Common;
@@ -40,6 +41,11 @@ namespace HR.ATS.Infrastructure.Repository.Common
         public Task<bool> ExistsAsync(Guid id, CancellationToken cancellationToken = default)
         {
             return Collection.AsQueryable().Where(e => e.Id == id).AnyAsync(cancellationToken);
+        }
+
+        public async Task<IEnumerable<T>> GetAll()
+        {
+            return await Collection.AsQueryable().ToListAsync();
         }
     }
 }

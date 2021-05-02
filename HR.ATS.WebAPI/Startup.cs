@@ -1,4 +1,5 @@
 using HR.ATS.Command;
+using HR.ATS.Domain;
 using HR.ATS.Infrastructure;
 using HR.ATS.Query;
 using HR.ATS.WebAPI.Configurations;
@@ -39,7 +40,7 @@ namespace HR.ATS.WebAPI
                     .AddRacAuthorizationPolicy()
                     .AddControllers(options => options.Filters.Add(new HttpResponseExceptionFilter()));
 
-            services.AddInfrastructure().AddQuery().AddCommand();
+            services.AddInfrastructure().AddQuery().AddCommand().AddDomain();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

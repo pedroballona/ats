@@ -65,11 +65,6 @@ namespace HR.ATS.Domain.Applicant
 
         private static Text CheckDescription(Text? experienceDescription)
         {
-            if (experienceDescription is null || experienceDescription.Length > MaximumDescriptionLength)
-            {
-                throw new ArgumentNullException(nameof(experienceDescription));
-            }
-
             return experienceDescription ?? throw new ValidationFieldRequiredException("experience description");
         }
 
@@ -95,9 +90,7 @@ namespace HR.ATS.Domain.Applicant
             var result = items?.ToHashSet();
 
             if (result is null || result.Count == 0)
-            {
                 throw new ValidationException("It's required to have at least one experience instance.");
-            }
 
             return result;
         }

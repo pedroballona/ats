@@ -2,23 +2,22 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using HR.ATS.CrossCutting.Dto.Applicant;
-using HR.ATS.Domain.Applicant;
 using HR.ATS.Domain.Person;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 
-namespace HR.ATS.Query
+namespace HR.ATS.Query.Applicant
 {
     public class GetResumeFromLoggedUserQuery : IRequest<ResumeDTO?>
     {
     }
 
-    public class GetResumeFromLoggedUserQueryHandler : IRequestHandler<GetResumeFromLoggedUserQuery, ResumeDTO?>
+    internal class GetResumeFromLoggedUserQueryHandler : IRequestHandler<GetResumeFromLoggedUserQuery, ResumeDTO?>
     {
-        private readonly IMongoDatabase _database;
         private readonly HttpContext _context;
+        private readonly IMongoDatabase _database;
 
         public GetResumeFromLoggedUserQueryHandler(IMongoDatabase database, IHttpContextAccessor contextAccessor)
         {
@@ -30,7 +29,7 @@ namespace HR.ATS.Query
         {
             var userId = _context.GetUserId();
             var personCollection = _database.GetCollection<Person>(nameof(Person));
-            var applicantCollection = _database.GetCollection<Applicant>(nameof(Applicant));
+            var applicantCollection = _database.GetCollection<Domain.Applicant.Applicant>(nameof(Domain.Applicant.Applicant));
             var query =
                 from person in personCollection.AsQueryable()
                 where person.UserId.Value == userId
@@ -39,11 +38,8 @@ namespace HR.ATS.Query
                 from singleApplicant in applicants.DefaultIfEmpty()
                 select singleApplicant.Resume;
 
-            var result = await query.FirstOrDefaultAsync(cancellationToken: cancellationToken);
-            if (result is null)
-            {
-                return null;
-            }
+            var result = await query.FirstOrDefaultAsync(cancellationToken);
+            if (result is null) return null;
 
             return new ResumeDTO
             {

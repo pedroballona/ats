@@ -2,10 +2,8 @@ using System.Threading.Tasks;
 using HR.ATS.Domain.Person;
 using HR.ATS.Infrastructure.Repository.Common;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
-using Tnf.Runtime.Session;
 
 namespace HR.ATS.Infrastructure.Repository
 {
