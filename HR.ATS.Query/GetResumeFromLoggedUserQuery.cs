@@ -47,7 +47,7 @@ namespace HR.ATS.Query
 
             return new ResumeDTO
             {
-                Experieces = result.Experiences.Items.Select(
+                Experiences = result.Experiences.Items.Select(
                     e => new ExperienceDTO
                     {
                         Company = e.Company,

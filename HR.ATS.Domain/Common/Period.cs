@@ -8,9 +8,9 @@ namespace HR.ATS.Domain.Common
     {
         protected static void CheckPeriod(DateTime? startDate, DateTime? endDate)
         {
-            if (startDate > endDate)
+            if (startDate >= endDate)
                 throw new ValidationException(
-                    "The informed period is invalid. The start date must be less than or equal to the end date."
+                    "The informed period is invalid. The start date must be less than the end date."
                 );
         }
     }
