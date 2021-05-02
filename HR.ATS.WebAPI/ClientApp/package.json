@@ -23,6 +23,7 @@
     "@totvs/po-theme": "*",
     "immer": "*",
     "jwt-decode": "*",
+    "luxon": "*",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
@@ -32,6 +33,7 @@
     "@angular/cli": "~11.2.0",
     "@angular/compiler-cli": "~11.2.0",
     "@types/jasmine": "~3.6.0",
+    "@types/luxon": "*",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
     "jasmine-core": "~3.6.0",

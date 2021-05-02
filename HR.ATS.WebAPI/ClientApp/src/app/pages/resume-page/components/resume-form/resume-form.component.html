@@ -1,0 +1,83 @@
+<div class="outer">
+  <div class="form custom-scroll">
+    <form [formGroup]="formGroup">
+      <div class="po-row">
+        <po-textarea
+          class="po-sm-12"
+          p-label="Introduction"
+          [p-rows]="8"
+          formControlName="introduction"
+        ></po-textarea>
+      </div>
+      <div formArrayName="experiences">
+        <div
+          class="po-row"
+          *ngFor="let group of experiences.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <po-widget
+            class="po-sm-12 po-mt-2 po-mb-2"
+            [p-primary-label]="experiences.controls.length > 1 ? 'Remove' : ''"
+            (p-primary-action)="removeExperienceForm(i)"
+            [p-title]="'Experience ' + (i + 1)"
+          >
+            <div class="po-row">
+              <po-input
+                class="po-sm-12 po-md-6 po-lg-3"
+                p-label="Company"
+                formControlName="company"
+              ></po-input>
+            </div>
+            <div class="po-row">
+              <po-textarea
+                class="po-sm-12"
+                p-label="Description"
+                formControlName="description"
+              ></po-textarea>
+            </div>
+            <div class="po-row">
+              <po-datepicker
+                class="po-sm-6"
+                formControlName="periodStartDate"
+                p-label="Start date"
+                [p-iso-format]="isoFormat"
+                [p-max-date]="endDate.date"
+                #startDate
+              ></po-datepicker>
+              <po-datepicker
+                class="po-sm-6"
+                formControlName="periodEndDate"
+                p-label="End date"
+                [p-iso-format]="isoFormat"
+                [p-min-date]="startDate.date"
+                p-error-pattern="The end date must be greater than the start date"
+                #endDate
+              ></po-datepicker>
+            </div>
+          </po-widget>
+        </div>
+        <div class="po-row center">
+          <po-button
+            p-label="Add experience"
+            (p-click)="addExperienceForm()"
+            p-icon="po-icon-plus-circle"
+          ></po-button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="buttons po-pt-1">
+    <po-button
+      class="po-sm-6 po-lg-2"
+      p-label="Save"
+      p-type="primary"
+      [p-disabled]="formGroup.invalid"
+      (p-click)="save()"
+    ></po-button>
+    <po-button
+      class="po-sm-6 po-lg-2"
+      p-label="Cancel"
+      (p-click)="cancel()"
+    ></po-button>
+  </div>
+</div>

@@ -53,7 +53,7 @@ namespace HR.ATS.Command.Applicant
             Resume resume = new (
                 request.Resume.Introduction,
                 new Experiences(
-                    request.Resume.Experieces.Select(
+                    request.Resume.Experiences.Select(
                         e => new Experience(
                             e.Company,
                             e.Description,

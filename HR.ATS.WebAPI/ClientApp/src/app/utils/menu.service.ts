@@ -15,7 +15,8 @@ const menu: MenuItem[] = [
     link: 'resume',
     permissions: [
       Role.Candidate
-    ]
+    ],
+    icon: 'po-icon-document-filled'
   }
 ];
 

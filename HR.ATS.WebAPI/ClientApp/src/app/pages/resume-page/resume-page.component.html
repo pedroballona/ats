@@ -1,2 +1,3 @@
-<p>resume-page works!</p>
-<button (click)="logout()">LogOff</button>
+<po-page-default p-title="My Resume">
+  <app-resume-form [resume]="state$ | async" (saved)="onSave($event)"></app-resume-form>
+</po-page-default>

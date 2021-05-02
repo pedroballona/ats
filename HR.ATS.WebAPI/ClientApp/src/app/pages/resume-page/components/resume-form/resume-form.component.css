@@ -1,0 +1,19 @@
+.center {
+  justify-content: center;
+}
+
+.outer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.form {
+  flex: 1;
+  overflow: auto;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row-reverse;
+}
