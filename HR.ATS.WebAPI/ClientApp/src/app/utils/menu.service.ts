@@ -26,6 +26,11 @@ const menu: MenuItem[] = [
         permissions: [Role.Recruiter],
         link: 'opening/management',
       },
+      {
+        label: 'Listing',
+        permissions: [Role.Candidate],
+        link: 'opening/listing',
+      },
     ],
   },
 ];

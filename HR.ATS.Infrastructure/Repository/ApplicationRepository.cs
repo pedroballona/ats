@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using HR.ATS.Domain.Applicant;
 using HR.ATS.Domain.Opening;
@@ -19,6 +20,11 @@ namespace HR.ATS.Infrastructure.Repository
                                          .Where(a => a.ApplicantId == applicant.Id && a.OpeningId == opening.Id)
                                          .AnyAsync();
             return hasAny;
+        }
+
+        public async Task DeleteAllApplicationsFromOpening(Guid openingId)
+        {
+            await Collection.DeleteManyAsync(a => a.OpeningId == openingId);
         }
     }
 }

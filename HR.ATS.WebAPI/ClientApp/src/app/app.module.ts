@@ -14,6 +14,7 @@ import { ResumeFormComponent } from './pages/resume-page/components/resume-form/
 import { ResumePageComponent } from './pages/resume-page/resume-page.component';
 import { OpeningManagementPageComponent } from './pages/opening-management-page/opening-management-page.component';
 import { OpeningFormComponent } from './pages/opening-management-page/components/opening-form/opening-form.component';
+import { OpeningListingPageComponent } from './pages/opening-listing-page/opening-listing-page.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { OpeningFormComponent } from './pages/opening-management-page/components
     HomeComponent,
     ResumeFormComponent,
     OpeningManagementPageComponent,
-    OpeningFormComponent
+    OpeningFormComponent,
+    OpeningListingPageComponent
   ],
   imports: [
     BrowserModule,

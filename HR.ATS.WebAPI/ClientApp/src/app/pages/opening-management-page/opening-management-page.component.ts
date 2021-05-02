@@ -26,7 +26,7 @@ export class OpeningManagementPageComponent implements OnInit {
   state$ = this.pageStateService.state$;
   listViewActions: PoListViewAction[] = [
     {
-      label: 'Remover',
+      label: 'Delete',
       action: async (opening: Opening) => {
         if (opening.id) {
           await this.pageStateService.delete(opening.id);

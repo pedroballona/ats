@@ -1,0 +1,12 @@
+<po-page-list
+  p-title="Opening listings"
+  [p-filter]="filter"
+>
+  <po-list-view
+    p-property-title="name"
+    *ngIf="state$ | async as state"
+    [p-items]="state.items"
+    [p-actions]="listViewActions"
+  >
+  </po-list-view>
+</po-page-list>
