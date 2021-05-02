@@ -1,7 +1,16 @@
 <div class="po-wrapper">
-  <po-toolbar p-title="TOTVS ATS"></po-toolbar>
+  <po-toolbar
+    *ngIf="profile$ | async as profile"
+    p-title="TOTVS ATS"
+    [p-profile]="profile"
+    [p-profile-actions]="profileActions"
+  ></po-toolbar>
 
-  <po-menu *ngIf="menus$ | async as menu" [p-menus]="menu" [p-logo]="'assets/img/totvs.png'"></po-menu>
+  <po-menu
+    *ngIf="menus$ | async as menu"
+    [p-menus]="menu"
+    [p-logo]="'assets/img/totvs.png'"
+  ></po-menu>
 
   <router-outlet></router-outlet>
 </div>
