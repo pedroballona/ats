@@ -15,7 +15,7 @@ Primeiramente abrir o arquivo **HR.ATS.WebAPI/appsettings.Development.json**. E 
 # dotnet run -p HR.ATS.WebAPI/HR.ATS.WebAPI.csproj 
 ```
 
-O projeto só estará pronto para rodar quando a seguinte mensagem aparecer no terminal:
+**O projeto só estará pronto para acessar quando a seguinte mensagem aparecer no terminal:**
 
 ```
 ✔ Browser application bundle generation complete.
