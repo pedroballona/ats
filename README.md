@@ -28,6 +28,7 @@ Primeiramente abrir o arquivo **HR.ATS.WebAPI/appsettings.Development.json**. E 
 ```
 ✔ Browser application bundle generation complete.
 ```
+O frontend se encontra na pasta **HR.ATS.WebAPI/ClientApp/** em teoria durante o build da solução é rodado o **npm install**. Se der algum problema delete a **HR.ATS.WebAPI/ClientApp/node_modules** e rode o **npm install** na pasta **HR.ATS.WebAPI/ClientApp/**.
 
 ## Acessar o sistema
 
