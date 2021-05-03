@@ -1,3 +1,4 @@
+using System;
 using HR.ATS.Command;
 using HR.ATS.Domain;
 using HR.ATS.Infrastructure;
@@ -89,6 +90,7 @@ namespace HR.ATS.WebAPI
                     // see https://go.microsoft.com/fwlink/?linkid=864501
 
                     spa.Options.SourcePath = "ClientApp";
+                    spa.Options.StartupTimeout = TimeSpan.FromMinutes(20);
 
                     if (env.IsDevelopment()) spa.UseAngularCliServer("start");
                 }

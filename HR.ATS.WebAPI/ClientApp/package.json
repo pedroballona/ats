@@ -21,6 +21,7 @@
     "@angular/router": "~11.2.0",
     "@po-ui/ng-components": "^4.15.0",
     "@totvs/po-theme": "*",
+    "angular-oauth2-oidc": "*",
     "immer": "*",
     "jwt-decode": "*",
     "luxon": "*",

@@ -1,13 +1,14 @@
 <po-page-list
   p-title="Opening Management"
   [p-actions]="actions"
-  [p-filter]="filter"
+  [p-filter]="filter"  
 >
   <po-list-view
     p-property-title="name"
     *ngIf="state$ | async as state"
     [p-items]="state.items"
     [p-actions]="listViewActions"
+    (p-title-action)="onOpeningClicked($event)"
   >
   </po-list-view>
 </po-page-list>

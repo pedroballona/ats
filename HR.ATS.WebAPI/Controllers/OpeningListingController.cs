@@ -14,7 +14,7 @@ namespace HR.ATS.WebAPI.Controllers
 {
     [Route("api/opening/listing")]
     [TnfRoleAuthorize(RolesConstants.AtsCandidate)]
-    public class OpeningListingController: TnfController
+    public class OpeningListingController : TnfController
     {
         private readonly IMediator _mediator;
 
@@ -22,24 +22,23 @@ namespace HR.ATS.WebAPI.Controllers
         {
             _mediator = mediator;
         }
-        
+
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<OpeningDTO>), (int) HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IEnumerable<OpeningDto>), (int) HttpStatusCode.OK)]
         [ProducesResponseType(typeof(TotvsErrorMessage), (int) HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetAllOpenings(string? filter)
         {
             var result = await _mediator.Send(new GetAllOpeningsQuery(filter));
             return Ok(result);
         }
-        
+
         [HttpPost("{id:guid}/apply")]
-        [ProducesResponseType(typeof(ApplicationDTO), (int) HttpStatusCode.Created)]
+        [ProducesResponseType(typeof(ApplicationDto), (int) HttpStatusCode.Created)]
         [ProducesResponseType(typeof(TotvsErrorMessage), (int) HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetAllOpenings(Guid id)
         {
             var result = await _mediator.Send(new ApplyLoggedApplicantToOpeningCommand(id));
             return CreateResponseOnPost(result);
         }
-        
     }
 }

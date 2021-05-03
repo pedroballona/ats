@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using HR.ATS.CrossCutting;
@@ -46,8 +45,6 @@ namespace HR.ATS.Domain.Applicant
 
     public class Experience : ValueObject
     {
-        private const int MaximumDescriptionLength = 200;
-
         public Experience(
             Name company,
             Text description,
@@ -87,7 +84,7 @@ namespace HR.ATS.Domain.Applicant
 
         private static IEnumerable<Experience> CheckItems(IEnumerable<Experience> items)
         {
-            var result = items?.ToHashSet();
+            var result = items.ToHashSet();
 
             if (result is null || result.Count == 0)
                 throw new ValidationException("It's required to have at least one experience instance.");

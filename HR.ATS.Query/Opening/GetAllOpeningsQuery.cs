@@ -8,7 +8,7 @@ using MongoDB.Driver.Linq;
 
 namespace HR.ATS.Query.Opening
 {
-    public class GetAllOpeningsQuery : IRequest<IEnumerable<OpeningDTO>>
+    public class GetAllOpeningsQuery : IRequest<IEnumerable<OpeningDto>>
     {
         public GetAllOpeningsQuery(string? filter = default)
         {
@@ -18,7 +18,7 @@ namespace HR.ATS.Query.Opening
         public string? Filter { get; }
     }
 
-    internal class GetAllOpeningsQueryHandler : IRequestHandler<GetAllOpeningsQuery, IEnumerable<OpeningDTO>>
+    internal class GetAllOpeningsQueryHandler : IRequestHandler<GetAllOpeningsQuery, IEnumerable<OpeningDto>>
     {
         private readonly IMongoDatabase _database;
 
@@ -27,7 +27,7 @@ namespace HR.ATS.Query.Opening
             _database = database;
         }
 
-        public async Task<IEnumerable<OpeningDTO>> Handle(
+        public async Task<IEnumerable<OpeningDto>> Handle(
             GetAllOpeningsQuery request,
             CancellationToken cancellationToken
         )
@@ -35,20 +35,16 @@ namespace HR.ATS.Query.Opening
             var openingCollection = _database.GetCollection<Domain.Opening.Opening>(nameof(Domain.Opening.Opening));
             var filter = string.IsNullOrWhiteSpace(request.Filter) ? default : request.Filter;
             var query = openingCollection.AsQueryable();
-            if (filter is not null)
-            {
-                query = query.Where(opening => opening.Name.Value.ToLower().Contains(filter));
-            }
-            var result = await query
-                               .Select(
-                                   opening => new OpeningDTO
-                                   {
-                                       Name = opening.Name.Value,
-                                       Description = opening.Description.Value,
-                                       Id = opening.Id
-                                   }
-                               )
-                               .ToListAsync(cancellationToken);
+            if (filter is not null) query = query.Where(opening => opening.Name.Value.ToLower().Contains(filter));
+            var result = await query.Select(
+                                        opening => new OpeningDto
+                                        {
+                                            Name = opening.Name.Value,
+                                            Description = opening.Description.Value,
+                                            Id = opening.Id
+                                        }
+                                    )
+                                    .ToListAsync(cancellationToken);
             return result;
         }
     }

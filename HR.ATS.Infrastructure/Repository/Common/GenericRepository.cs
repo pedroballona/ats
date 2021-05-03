@@ -17,9 +17,10 @@ namespace HR.ATS.Infrastructure.Repository.Common
 
         protected IMongoCollection<T> Collection { get; }
 
-        public Task<T> FindAsync(Guid id, CancellationToken cancellationToken = default)
+        public async Task<T?> FindAsync(Guid id, CancellationToken cancellationToken = default)
         {
-            return Collection.AsQueryable().Where(e => e.Id == id).FirstOrDefaultAsync(cancellationToken);
+            var result = await Collection.AsQueryable().Where(e => e.Id == id).FirstOrDefaultAsync(cancellationToken);
+            return result;
         }
 
         public async Task<T> CreateAsync(T entity, CancellationToken cancellationToken = default)
@@ -27,7 +28,7 @@ namespace HR.ATS.Infrastructure.Repository.Common
             await Collection.InsertOneAsync(entity, cancellationToken: cancellationToken);
             return entity;
         }
-        
+
         public async Task DeleteAsync(Guid id, CancellationToken cancellationToken = default)
         {
             await Collection.DeleteOneAsync(d => d.Id == id, cancellationToken);

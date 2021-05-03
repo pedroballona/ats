@@ -10,7 +10,7 @@ using MediatR;
 
 namespace HR.ATS.Command.Applicant
 {
-    public class ApplyLoggedApplicantToOpeningCommand : IRequest<ApplicationDTO>
+    public class ApplyLoggedApplicantToOpeningCommand : IRequest<ApplicationDto>
     {
         public ApplyLoggedApplicantToOpeningCommand(Guid openingId)
         {
@@ -22,7 +22,7 @@ namespace HR.ATS.Command.Applicant
 
     internal class
         ApplyLoggedApplicantToOpeningCommandHandler : IRequestHandler<ApplyLoggedApplicantToOpeningCommand,
-            ApplicationDTO>
+            ApplicationDto>
     {
         private readonly IApplicantRepository _applicantRepository;
         private readonly IOpeningApplicator _openingApplicator;
@@ -42,7 +42,7 @@ namespace HR.ATS.Command.Applicant
             _openingApplicator = openingApplicator;
         }
 
-        public async Task<ApplicationDTO> Handle(
+        public async Task<ApplicationDto> Handle(
             ApplyLoggedApplicantToOpeningCommand request,
             CancellationToken cancellationToken
         )
@@ -59,7 +59,7 @@ namespace HR.ATS.Command.Applicant
 
             var application = await _openingApplicator.ApplyToOpening(applicant, opening);
 
-            return new ApplicationDTO
+            return new ApplicationDto
             {
                 ApplicantId = application.ApplicantId,
                 OpeningId = application.OpeningId

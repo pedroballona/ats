@@ -48,6 +48,7 @@ namespace HR.ATS.Domain.Common
 
         public override int GetHashCode()
         {
+            // ReSharper disable once NonReadonlyMemberInGetHashCode
             return Id.GetHashCode();
         }
     }

@@ -6,17 +6,17 @@ using MediatR;
 
 namespace HR.ATS.Command.Opening
 {
-    public class CreateOpeningCommand : IRequest<OpeningDTO>
+    public class CreateOpeningCommand : IRequest<OpeningDto>
     {
-        public CreateOpeningCommand(OpeningDTO opening)
+        public CreateOpeningCommand(OpeningDto opening)
         {
             Opening = opening;
         }
 
-        public OpeningDTO Opening { get; }
+        public OpeningDto Opening { get; }
     }
 
-    internal class CreateOpeningCommandHandler : IRequestHandler<CreateOpeningCommand, OpeningDTO>
+    internal class CreateOpeningCommandHandler : IRequestHandler<CreateOpeningCommand, OpeningDto>
     {
         private readonly IOpeningRepository _openingRepository;
 
@@ -25,9 +25,9 @@ namespace HR.ATS.Command.Opening
             _openingRepository = openingRepository;
         }
 
-        public async Task<OpeningDTO> Handle(CreateOpeningCommand request, CancellationToken cancellationToken)
+        public async Task<OpeningDto> Handle(CreateOpeningCommand request, CancellationToken cancellationToken)
         {
-            var opening = new Domain.Opening.Opening(request.Opening.Name, request.Opening.Description, true);
+            var opening = new Domain.Opening.Opening(request.Opening.Name!, request.Opening.Description!, true);
             await _openingRepository.CreateAsync(opening, cancellationToken);
             return request.Opening;
         }

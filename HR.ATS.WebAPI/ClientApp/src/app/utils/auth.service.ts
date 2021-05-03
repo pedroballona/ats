@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
-import { JwksValidationHandler } from 'angular-oauth2-oidc-jwks';
 import jwtDecode from 'jwt-decode';
 import { environment } from '../../environments/environment';
 import { State } from './state';
@@ -42,7 +41,6 @@ export class AuthService extends State<User> {
 
   init(): void {
     this.oauthService.configure(authConfig);
-    this.oauthService.tokenValidationHandler = new JwksValidationHandler();
   }
 
   async login(): Promise<void> {

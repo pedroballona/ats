@@ -10,7 +10,7 @@ using MongoDB.Bson.Serialization.IdGenerators;
 
 namespace HR.ATS.Infrastructure
 {
-    public static class IServiceCollectionExtensions
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {

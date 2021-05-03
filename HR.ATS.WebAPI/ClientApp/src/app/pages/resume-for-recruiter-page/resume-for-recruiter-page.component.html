@@ -1,0 +1,40 @@
+<po-page-default
+  *ngIf="state$ | async as applicant"
+  [p-title]="applicant.name + '\'s ' + 'resume'"
+  [p-breadcrumb]="breadcrumb"
+>
+  <div class="po-row po-mb-2">
+    <div class="po-sm-12">
+      <h2 class="po-mb-2">Introduction</h2>
+      <p>
+        {{ applicant.resume.introduction }}
+      </p>
+    </div>
+  </div>
+  <div class="po-row po-mb-2">
+    <div class="po-sm-12">
+      <h2 class="po-mb-2">Experiences</h2>
+      <po-widget
+        class="po-row po-mb-2"
+        [p-title]="'Experience on ' + experience.company"
+        *ngFor="let experience of applicant.resume.experiences; let i = index"
+      >
+        <div class="po-row po-mb-1">
+          <p class="po-sm-6">
+            <b>From: </b> <span>{{ experience.periodStartDate | date }}</span>
+          </p>
+          <p class="po-sm-6" *ngIf="experience.periodEndDate">
+            <b>To: </b> <span>{{ experience.periodEndDate | date }}</span>
+          </p>
+          <p class="po-sm-6" *ngIf="!experience.periodEndDate">
+            <b>To: </b> <span>Still working there</span>
+          </p>
+        </div>
+        <div class="po-sm-12">
+          <h3 class="po-mb-1">Description</h3>
+          <p>{{ experience.description }}</p>
+        </div>
+      </po-widget>
+    </div>
+  </div>
+</po-page-default>

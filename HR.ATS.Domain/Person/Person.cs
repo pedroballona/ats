@@ -5,7 +5,10 @@ namespace HR.ATS.Domain.Person
 {
     public class Person : Entity
     {
+        // ReSharper disable once UnusedMember.Local
+#pragma warning disable 8618
         private Person()
+#pragma warning restore 8618
         {
         }
 

@@ -4,6 +4,7 @@ using HR.ATS.CrossCutting;
 
 namespace HR.ATS.Domain.Common
 {
+    // ReSharper disable once UnusedTypeParameter
     public abstract class EntityReference<T> : ValueObject where T : Entity
     {
         protected EntityReference(Guid id)

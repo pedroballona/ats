@@ -10,11 +10,11 @@ using MongoDB.Driver.Linq;
 
 namespace HR.ATS.Query.Applicant
 {
-    public class GetResumeFromLoggedUserQuery : IRequest<ResumeDTO?>
+    public class GetResumeFromLoggedUserQuery : IRequest<ResumeDto?>
     {
     }
 
-    internal class GetResumeFromLoggedUserQueryHandler : IRequestHandler<GetResumeFromLoggedUserQuery, ResumeDTO?>
+    internal class GetResumeFromLoggedUserQueryHandler : IRequestHandler<GetResumeFromLoggedUserQuery, ResumeDto?>
     {
         private readonly HttpContext _context;
         private readonly IMongoDatabase _database;
@@ -25,11 +25,12 @@ namespace HR.ATS.Query.Applicant
             _context = contextAccessor.HttpContext;
         }
 
-        public async Task<ResumeDTO?> Handle(GetResumeFromLoggedUserQuery request, CancellationToken cancellationToken)
+        public async Task<ResumeDto?> Handle(GetResumeFromLoggedUserQuery request, CancellationToken cancellationToken)
         {
             var userId = _context.GetUserId();
             var personCollection = _database.GetCollection<Person>(nameof(Person));
-            var applicantCollection = _database.GetCollection<Domain.Applicant.Applicant>(nameof(Domain.Applicant.Applicant));
+            var applicantCollection =
+                _database.GetCollection<Domain.Applicant.Applicant>(nameof(Domain.Applicant.Applicant));
             var query =
                 from person in personCollection.AsQueryable()
                 where person.UserId.Value == userId
@@ -41,10 +42,10 @@ namespace HR.ATS.Query.Applicant
             var result = await query.FirstOrDefaultAsync(cancellationToken);
             if (result is null) return null;
 
-            return new ResumeDTO
+            return new ResumeDto
             {
                 Experiences = result.Experiences.Items.Select(
-                    e => new ExperienceDTO
+                    e => new ExperienceDto
                     {
                         Company = e.Company,
                         Description = e.Description,

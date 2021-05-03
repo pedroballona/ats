@@ -7,7 +7,7 @@ using MediatR;
 
 namespace HR.ATS.Command.Opening
 {
-    public class DeleteOpeningCommand: IRequest<Unit>
+    public class DeleteOpeningCommand : IRequest<Unit>
     {
         public DeleteOpeningCommand(Guid id)
         {
@@ -19,14 +19,15 @@ namespace HR.ATS.Command.Opening
 
     public class DeleteOpeningCommandHandler : IRequestHandler<DeleteOpeningCommand, Unit>
     {
-        private readonly IOpeningRepository _openingRepository;
         private readonly IMediator _mediator;
+        private readonly IOpeningRepository _openingRepository;
 
         public DeleteOpeningCommandHandler(IOpeningRepository openingRepository, IMediator mediator)
         {
             _openingRepository = openingRepository;
             _mediator = mediator;
         }
+
         public async Task<Unit> Handle(DeleteOpeningCommand request, CancellationToken cancellationToken)
         {
             await _openingRepository.DeleteAsync(request.Id, cancellationToken);

@@ -2,7 +2,6 @@ using System.Net;
 using System.Threading.Tasks;
 using HR.ATS.Command.Applicant;
 using HR.ATS.CrossCutting.Dto.Applicant;
-using HR.ATS.Query;
 using HR.ATS.Query.Applicant;
 using HR.ATS.WebAPI.Configurations;
 using HR.ATS.WebAPI.Security.Roles;
@@ -23,16 +22,16 @@ namespace HR.ATS.WebAPI.Controllers
         }
 
         [HttpPut("logged/resume")]
-        [ProducesResponseType(typeof(ResumeDTO), (int) HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ResumeDto), (int) HttpStatusCode.OK)]
         [ProducesResponseType(typeof(TotvsErrorMessage), (int) HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> UpdateResumeFromLoggedApplicant([FromBody] ResumeDTO resumeDto)
+        public async Task<IActionResult> UpdateResumeFromLoggedApplicant([FromBody] ResumeDto resumeDto)
         {
             var result = await _mediator.Send(new UpdateResumeForLoggedApplicantCommand(resumeDto));
             return CreateResponseOnPut(result);
         }
 
         [HttpGet("logged/resume")]
-        [ProducesResponseType(typeof(ResumeDTO), (int) HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ResumeDto), (int) HttpStatusCode.OK)]
         [ProducesResponseType(typeof(TotvsErrorMessage), (int) HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetResumeFromLoggedUser()
         {

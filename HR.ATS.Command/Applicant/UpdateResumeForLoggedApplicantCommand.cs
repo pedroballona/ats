@@ -10,18 +10,18 @@ using MediatR;
 
 namespace HR.ATS.Command.Applicant
 {
-    public class UpdateResumeForLoggedApplicantCommand : IRequest<ResumeDTO>
+    public class UpdateResumeForLoggedApplicantCommand : IRequest<ResumeDto>
     {
-        public UpdateResumeForLoggedApplicantCommand(ResumeDTO resume)
+        public UpdateResumeForLoggedApplicantCommand(ResumeDto resume)
         {
             Resume = resume;
         }
 
-        public ResumeDTO Resume { get; }
+        public ResumeDto Resume { get; }
     }
 
     internal class
-        UpdateResumeForLoggedApplicantCommandHandler : IRequestHandler<UpdateResumeForLoggedApplicantCommand, ResumeDTO>
+        UpdateResumeForLoggedApplicantCommandHandler : IRequestHandler<UpdateResumeForLoggedApplicantCommand, ResumeDto>
     {
         private readonly IApplicantRepository _applicantRepository;
         private readonly IPersonRepository _personRepository;
@@ -35,7 +35,7 @@ namespace HR.ATS.Command.Applicant
             _applicantRepository = applicantRepository;
         }
 
-        public async Task<ResumeDTO> Handle(
+        public async Task<ResumeDto> Handle(
             UpdateResumeForLoggedApplicantCommand request,
             CancellationToken cancellationToken
         )
@@ -45,11 +45,11 @@ namespace HR.ATS.Command.Applicant
             if (loggedPerson is null) throw new ValidationException("The current logged user is not a person.");
 
             var applicant = await _applicantRepository.GetApplicantFromPerson(loggedPerson.Id);
-            Resume resume = new(request.Resume.Introduction, new Experiences(
+            Resume resume = new(request.Resume.Introduction!, new Experiences(
                 request.Resume.Experiences?.Select(
                     e => new Experience(
-                        e.Company,
-                        e.Description,
+                        e.Company!,
+                        e.Description!,
                         new OpenEndedPeriod(e.PeriodStartDate, e.PeriodEndDate)
                     )
                 )!

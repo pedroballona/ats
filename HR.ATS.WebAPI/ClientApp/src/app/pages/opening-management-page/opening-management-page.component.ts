@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { PoListViewAction, PoPageAction, PoPageFilter } from '@po-ui/ng-components';
+import { assert } from '../../utils/assert';
 import { OpeningFormComponent } from './components/opening-form/opening-form.component';
 import { Opening } from './models/opening.model';
 import { OpeningManagementPageStateService } from './opening-management-page-state.service';
@@ -36,7 +38,7 @@ export class OpeningManagementPageComponent implements OnInit {
     }
   ];
 
-  constructor(private pageStateService: OpeningManagementPageStateService) { }
+  constructor(private pageStateService: OpeningManagementPageStateService, private router: Router) { }
 
   async ngOnInit(): Promise<void> {
     await this.pageStateService.init();
@@ -45,6 +47,12 @@ export class OpeningManagementPageComponent implements OnInit {
   async onSave(opening: Opening): Promise<void> {
     await this.pageStateService.save(opening);
     this.creationModal?.close();
+  }
+
+  onOpeningClicked(event: Event): void {
+    const opening = event as unknown as Opening;
+    assert(opening?.id);
+    this.router.navigate(['opening', 'management', opening.id, 'applied', 'applicants']);
   }
 
 }
