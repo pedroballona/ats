@@ -15,19 +15,23 @@ const menu: MenuItem[] = [
     link: 'resume',
     permissions: [Role.Candidate],
     icon: 'po-icon-document-filled',
+    shortLabel: 'My resume'
   },
   {
     label: 'Openings',
+    shortLabel: 'Openings',
     icon: 'po-icon-grid',
     permissions: [],
     subItems: [
       {
         label: 'Management',
+        shortLabel: 'Management',
         permissions: [Role.Recruiter],
         link: 'opening/management',
       },
       {
         label: 'Listing',
+        shortLabel: 'Listing',
         permissions: [Role.Candidate],
         link: 'opening/listing',
       },

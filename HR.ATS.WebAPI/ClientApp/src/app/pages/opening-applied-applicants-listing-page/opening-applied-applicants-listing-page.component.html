@@ -1,0 +1,13 @@
+<po-page-list
+  p-title="Applied applicants"
+  [p-filter]="filter"
+  [p-breadcrumb]="breadcrumb"
+>
+  <po-table
+    *ngIf="state$ | async as state"
+    [p-items]="state.applicants"
+    [p-columns]="columns"
+    [p-actions]="tableActions"
+  >
+  </po-table>
+</po-page-list>

@@ -16,4 +16,17 @@ namespace HR.ATS.CrossCutting.Dto.Applicant
         public string Introduction { get; set; }
         public IEnumerable<ExperienceDTO> Experiences { get; set; }
     }
+
+    public class SimpleApplicantDTO
+    {
+        public string Name { get; set; }
+        public Guid Id { get; set; }
+    }
+
+    public class ApplicantDTO
+    {
+        public string Name { get; set; }
+        public Guid Id { get; set; }
+        public ResumeDTO Resume { get; set; }
+    }
 }

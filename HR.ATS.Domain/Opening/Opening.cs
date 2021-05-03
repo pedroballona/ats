@@ -5,7 +5,11 @@ namespace HR.ATS.Domain.Opening
 {
     public class Opening : Entity
     {
-        public Opening(Name name, Text description, bool isOpen)
+        public Opening(
+            Name name,
+            Text description,
+            bool isOpen
+        )
         {
             Name = name ?? throw new ValidationFieldRequiredException("name");
             Description = description ?? throw new ValidationFieldRequiredException("opening description");

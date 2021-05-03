@@ -2,7 +2,6 @@ using System.Net;
 using System.Threading.Tasks;
 using HR.ATS.Command.Applicant;
 using HR.ATS.CrossCutting.Dto.Applicant;
-using HR.ATS.Query;
 using HR.ATS.Query.Applicant;
 using HR.ATS.WebAPI.Configurations;
 using HR.ATS.WebAPI.Security.Roles;

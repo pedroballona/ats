@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using HR.ATS.Command.Opening;
+using HR.ATS.CrossCutting.Dto.Applicant;
 using HR.ATS.CrossCutting.Dto.Opening;
 using HR.ATS.Query.Applicant;
 using HR.ATS.Query.Opening;
@@ -15,7 +16,7 @@ namespace HR.ATS.WebAPI.Controllers
 {
     [Route("api/opening/management")]
     [TnfRoleAuthorize(RolesConstants.AtsRecruiter)]
-    public class OpeningManagementController: TnfController
+    public class OpeningManagementController : TnfController
     {
         private readonly IMediator _mediator;
 
@@ -23,7 +24,7 @@ namespace HR.ATS.WebAPI.Controllers
         {
             _mediator = mediator;
         }
-        
+
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<OpeningDTO>), (int) HttpStatusCode.OK)]
         [ProducesResponseType(typeof(TotvsErrorMessage), (int) HttpStatusCode.BadRequest)]
@@ -32,7 +33,16 @@ namespace HR.ATS.WebAPI.Controllers
             var result = await _mediator.Send(new GetAllOpeningsQuery(filter));
             return Ok(result);
         }
-        
+
+        [HttpGet("{id:guid}/applied/applicants")]
+        [ProducesResponseType(typeof(IEnumerable<SimpleApplicantDTO>), (int) HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(TotvsErrorMessage), (int) HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> GetAllOpenings(Guid id, [FromQuery] string? filter)
+        {
+            var result = await _mediator.Send(new GetAllApplicantsThatAppliedToAnOpeningQuery(id, filter));
+            return Ok(result);
+        }
+
         [HttpPost]
         [ProducesResponseType(typeof(IEnumerable<OpeningDTO>), (int) HttpStatusCode.Created)]
         [ProducesResponseType(typeof(TotvsErrorMessage), (int) HttpStatusCode.BadRequest)]
@@ -49,6 +59,15 @@ namespace HR.ATS.WebAPI.Controllers
         {
             await _mediator.Send(new DeleteOpeningCommand(id));
             return CreateResponseOnDelete();
+        }
+
+        [HttpGet("applicant/{id:guid}")]
+        [ProducesResponseType(typeof(IEnumerable<ApplicantDTO>), (int) HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(TotvsErrorMessage), (int) HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> GetAllOpenings(Guid id)
+        {
+            var result = await _mediator.Send(new GetResumeFromApplicantQuery(id));
+            return CreateResponseOnGet(result);
         }
     }
 }

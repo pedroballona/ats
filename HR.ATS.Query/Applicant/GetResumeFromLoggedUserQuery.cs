@@ -29,7 +29,8 @@ namespace HR.ATS.Query.Applicant
         {
             var userId = _context.GetUserId();
             var personCollection = _database.GetCollection<Person>(nameof(Person));
-            var applicantCollection = _database.GetCollection<Domain.Applicant.Applicant>(nameof(Domain.Applicant.Applicant));
+            var applicantCollection =
+                _database.GetCollection<Domain.Applicant.Applicant>(nameof(Domain.Applicant.Applicant));
             var query =
                 from person in personCollection.AsQueryable()
                 where person.UserId.Value == userId

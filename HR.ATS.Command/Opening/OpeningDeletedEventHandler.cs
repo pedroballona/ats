@@ -6,7 +6,7 @@ using MediatR;
 
 namespace HR.ATS.Command.Opening
 {
-    public class OpeningDeletedEventHandler: INotificationHandler<OpeningDeletedEvent>
+    public class OpeningDeletedEventHandler : INotificationHandler<OpeningDeletedEvent>
     {
         private readonly IApplicationRepository _applicationRepository;
 
@@ -14,6 +14,7 @@ namespace HR.ATS.Command.Opening
         {
             _applicationRepository = applicationRepository;
         }
+
         public async Task Handle(OpeningDeletedEvent notification, CancellationToken cancellationToken)
         {
             await _applicationRepository.DeleteAllApplicationsFromOpening(notification.OpeningId);
