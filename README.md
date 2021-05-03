@@ -1,5 +1,13 @@
 # TOTVS ATS (Projeto desafio não oficial)
 
+## Versões
+
+**Esse programa foi testado funcionando usando as seguintes versões:**
+
+![](https://img.shields.io/badge/dotnet-v5.0.103-blue)
+![](https://img.shields.io/badge/node-v14.16.1-blue)
+![](https://img.shields.io/badge/npm-v7.11.2-blue)
+
 ## Como rodar
 
 Primeiramente abrir o arquivo **HR.ATS.WebAPI/appsettings.Development.json**. E modificar o valor da url do banco para um banco mongo válido.
